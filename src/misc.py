@@ -11,7 +11,7 @@ def welcome_options():
             return s
 
 def new_user():
-    print("Welcome please enter your username :", end=" ")
+    print("\nWelcome please enter your username :", end=" ")
     username = input()
     print()
     password = getpass.getpass(prompt='Enter a master key : ')

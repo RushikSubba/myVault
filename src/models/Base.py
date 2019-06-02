@@ -13,12 +13,12 @@ class User(Base):
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True)
-    name = Column(String)
+    name = Column(String, unique=True)
     key = Column(String)
     master_pass = Column(String)
 
     def __repr__(self):
-        return "<User(id='%s', name='%s', key='%s', master_pass='%s')" %(
+        return "<User(id='%s',name='%s', key='%s', master_pass='%s')" %(
             self.id, self.name, self.key, self.master_pass)
 
 # passwords table for storing the user passwords for different websites
@@ -37,8 +37,8 @@ class passwords(Base):
     user = relationship('User', foreign_keys='passwords.user_id', lazy='joined')
 
     def __repr__(self):
-        return "<passwords(user_id='%s', name='%s', url='%s', login='%s')>" % (
-            self.user_id, self.name, self.url, self.login)
+        return "<passwords(id='%s', user_id='%s', name='%s', url='%s', login='%s')>" % (
+            self.id, self.user_id, self.name, self.url, self.login)
 
 if __name__ == "__main__":
     Base.metadata.create_all(engine)
