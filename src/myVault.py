@@ -2,10 +2,24 @@ import os
 import sys
 import bcrypt
 from pathlib import Path
+from sqlalchemy.orm import sessionmaker
 
 from . import misc
-
 from .models import Base
+
+Session = sessionmaker()
+session = None
+
+def new_user():
+    Session.configure(bind=Base.engine)
+    session = Session()
+    details = misc.new_user()
+    salt = bcrypt.gensalt()
+    details[1] = bcrypt.hashpw(details[1].encode('utf8'), salt)
+    new = Base.User(name=details[0], key=salt, master_pass=details[1])
+    session.add(new)
+    session.commit()
+    session.close()
 
 
 def main():
@@ -23,4 +37,5 @@ def main():
     s = misc.welcome_options()
     if s == 'q':
         sys.exit()
-
+    elif s == 'n':
+        new_user()
