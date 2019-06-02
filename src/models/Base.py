@@ -2,10 +2,13 @@ from sqlalchemy import create_engine, Column, String, Integer, BLOB, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 
-engine = create_engine('sqlite:///./myVault.db')
+# create db engine
+engine = create_engine('sqlite:///src/myVault.db')
 
 Base = declarative_base()
 
+
+# user table to store user master passwords
 class User(Base):
     __tablename__ = 'users'
 
@@ -18,6 +21,7 @@ class User(Base):
         return "<User(id='%s', name='%s', key='%s', master_pass='%s')" %(
             self.id, self.name, self.key, self.master_pass)
 
+# passwords table for storing the user passwords for different websites
 class passwords(Base):
     __tablename__ = 'passwords'
 
