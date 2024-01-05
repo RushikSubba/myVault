@@ -14,7 +14,7 @@ setuptools.setup(
     license='MIT',
     packages=['myVault', 'myVault.models'],
     package_dir={'myVault': 'src'},
-    install_requires=['bcrypt==3.1.6', 'pycryptodome==3.8.2', 'SQLAlchemy==1.3.4'],
+    install_requires=['bcrypt==3.1.6', 'pycryptodome==3.19.1', 'SQLAlchemy==1.3.4'],
     classifiers=[
         'Topic :: Security',
         'Topic :: Security :: Cryptography',
